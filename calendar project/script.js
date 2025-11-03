@@ -1,17 +1,15 @@
-// Calendar State
 let currentDate = new Date();
 let selectedDate = new Date();
-let events = {}; // Will be loaded from localStorage
+let events = {}; 
 let selectedColor = 'bg-blue-500';
 let editingEventId = null;
-let lastUpdatedDateKey = null; // +++ NEW: To track which day to animate
+let lastUpdatedDateKey = null; 
 
 const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-// Color options
 const colorOptions = [
     { name: 'Blue', class: 'bg-blue-500' },
     { name: 'Red', class: 'bg-red-500' },
@@ -23,7 +21,6 @@ const colorOptions = [
     { name: 'Indigo', class: 'bg-indigo-500' }
 ];
 
-// DOM Elements
 const calendarGrid = document.getElementById('calendarGrid');
 const currentMonth = document.getElementById('currentMonth');
 const currentYear = document.getElementById('currentYear');
@@ -43,12 +40,10 @@ const modalTitle = document.getElementById('modalTitle');
 const monthListView = document.getElementById('monthListView');
 const yearListView = document.getElementById('yearListView');
 
-// Initialize calendar
 function initCalendar() {
     loadEvents();
-    render(); // Use main render function
+    render(); 
     
-    // Event listeners
     prevMonthBtn.addEventListener('click', () => navigateMonth(-1));
     nextMonthBtn.addEventListener('click', () => navigateMonth(1));
     addEventBtn.addEventListener('click', () => openEventModal(new Date(), null));
@@ -81,13 +76,11 @@ function initCalendar() {
     });
 }
 
-// Simplified main render function
 function render() {
-    updateMonthYear(); // Update header text
-    renderDayGrid(); // Render the main calendar grid
+    updateMonthYear(); 
+    renderDayGrid(); 
 }
 
-// Get days in month
 function getDaysInMonth(date) {
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -125,11 +118,10 @@ function renderDayGrid() {
             const isToday = isTodayDate(date);
             const isSelected = isSelectedDate(date);
             
-            // +++ NEW: Check if this day was just updated +++
             const dateKey = date.toISOString().split('T')[0];
             if (dateKey === lastUpdatedDateKey) {
                 dayElement.classList.add('animate-flash-day');
-                lastUpdatedDateKey = null; // Reset so it only animates once
+                lastUpdatedDateKey = null; 
             }
             
             if (isToday) {
@@ -196,7 +188,6 @@ function renderDayGrid() {
     });
 }
 
-// Render color options
 function renderColorOptions() {
     colorOptionsContainer.innerHTML = '';
     colorOptions.forEach(color => {
@@ -216,19 +207,16 @@ function renderColorOptions() {
     });
 }
 
-// Simplified navigation
 function navigateMonth(direction) {
     currentDate.setMonth(currentDate.getMonth() + direction);
     render();
 }
 
-// Update the new span elements
 function updateMonthYear() {
     currentMonth.textContent = monthNames[currentDate.getMonth()];
     currentYear.textContent = currentDate.getFullYear();
 }
 
-// Show the month list dropdown
 function showMonthList() {
     monthListView.innerHTML = '';
     const currentMonthIndex = currentDate.getMonth();
@@ -244,11 +232,10 @@ function showMonthList() {
         monthListView.appendChild(monthItem);
     });
 
-    yearListView.classList.add('hidden'); // Hide other list
+    yearListView.classList.add('hidden'); 
     monthListView.classList.toggle('hidden');
 }
 
-// Show the year list dropdown
 function showYearList() {
     yearListView.innerHTML = '';
     const currentYearVal = currentDate.getFullYear();
@@ -268,7 +255,7 @@ function showYearList() {
         yearListView.appendChild(yearItem);
     }
     
-    monthListView.classList.add('hidden'); // Hide other list
+    monthListView.classList.add('hidden'); 
     yearListView.classList.toggle('hidden');
 
     if (activeYearElement && !yearListView.classList.contains('hidden')) {
@@ -276,21 +263,18 @@ function showYearList() {
     }
 }
 
-// Click handler for month list
 function selectMonth(index) {
     currentDate.setMonth(index);
     monthListView.classList.add('hidden');
     render();
 }
 
-// Click handler for year list
 function selectYear(year) {
     currentDate.setFullYear(year);
     yearListView.classList.add('hidden');
     render();
 }
 
-// Event modal functions
 function openEventModal(date, eventId) {
     selectedDate = date;
     editingEventId = eventId;
@@ -317,7 +301,7 @@ function openEventModal(date, eventId) {
         deleteEventBtn.classList.add('hidden');
     }
     
-    renderColorOptions(); // Render colors only when modal opens
+    renderColorOptions(); 
     eventModal.classList.remove('hidden');
     eventModal.classList.remove('animate-fade-out');
     eventModal.classList.add('animate-fade-in');
@@ -357,7 +341,7 @@ function saveNewEvent() {
             });
         }
         
-        lastUpdatedDateKey = dateKey; // +++ NEW: Set key for animation
+        lastUpdatedDateKey = dateKey; 
         saveEvents();
         closeEventModal();
         render();
@@ -374,13 +358,12 @@ function deleteSelectedEvent() {
         delete events[dateKey];
     }
     
-    lastUpdatedDateKey = dateKey; // +++ NEW: Set key for animation
+    lastUpdatedDateKey = dateKey; 
     saveEvents();
     closeEventModal();
     render();
 }
 
-// LocalStorage functions
 function saveEvents() {
     localStorage.setItem('calendarEvents', JSON.stringify(events));
 }
@@ -392,7 +375,6 @@ function loadEvents() {
     }
 }
 
-// Helper functions
 function getEventsForDate(date) {
     if (!date) return [];
     const dateKey = date.toISOString().split('T')[0];
@@ -412,5 +394,4 @@ function isSelectedDate(date) {
            date.getFullYear() === selectedDate.getFullYear();
 }
 
-// Initialize the calendar when the page loads
 document.addEventListener('DOMContentLoaded', initCalendar);
