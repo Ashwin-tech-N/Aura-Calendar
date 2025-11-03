@@ -13,7 +13,7 @@ body {
 .event-item {
     animation: slideInEvent 0.4s ease-out forwards;
     animation-delay: calc(var(--delay) * 0.1s);
-    opacity: 0; /* Start hidden for animation */
+    opacity: 0; 
 }
 
 @keyframes slideInEvent {
@@ -90,18 +90,17 @@ body {
     height: 1.1em;
 }
 
-/* Custom scrollbar for year list */
 .year-list-scrollbar::-webkit-scrollbar {
     width: 6px;
 }
 .year-list-scrollbar::-webkit-scrollbar-track {
-    background: #f1f5f9; /* gray-100 */
+    background: #f1f5f9; 
     border-radius: 10px;
 }
 .year-list-scrollbar::-webkit-scrollbar-thumb {
-    background: #94a3b8; /* gray-400 */
+    background: #94a3b8; 
     border-radius: 10px;
 }
 .year-list-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #64748b; /* gray-500 */
+    background: #64748b; 
 }
