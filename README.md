@@ -35,7 +35,7 @@ A modern, aesthetic, and interactive calendar component built with pure JavaScri
 
 1.  **Clone or Download**: Get the files onto your local machine.
     ```bash
-    git clone [https://your-repository-link.git](https://your-repository-link.git)
+    git clone [https://your-repository-link.git](https://your-repository-link.git](https://github.com/Ashwin-tech-N/Aura-Calendar/tree/main))
     ```
 2.  **Open `index.html`**: No complex build steps required. Just open the `index.html` file in your favorite web browser.
 
