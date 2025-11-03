@@ -1,0 +1,107 @@
+body {
+    background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 50%, #c7d2fe 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.calendar-day:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.event-item {
+    animation: slideInEvent 0.4s ease-out forwards;
+    animation-delay: calc(var(--delay) * 0.1s);
+    opacity: 0; /* Start hidden for animation */
+}
+
+@keyframes slideInEvent {
+    from {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.modal-content {
+    animation: modalEntry 0.4s ease-out;
+}
+
+.animate-fade-out .modal-content {
+    animation: modalExit 0.3s ease-in forwards;
+}
+
+@keyframes modalEntry {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+@keyframes modalExit {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+}
+
+
+.glow-effect {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+}
+
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+}
+
+.plus-icon {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.chevron-icon {
+    width: 1.1em;
+    height: 1.1em;
+}
+
+.ellipsis-icon {
+    width: 0.8em;
+    height: 0.8em;
+}
+
+.close-icon {
+    width: 1.1em;
+    height: 1.1em;
+}
+
+/* Custom scrollbar for year list */
+.year-list-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.year-list-scrollbar::-webkit-scrollbar-track {
+    background: #f1f5f9; /* gray-100 */
+    border-radius: 10px;
+}
+.year-list-scrollbar::-webkit-scrollbar-thumb {
+    background: #94a3b8; /* gray-400 */
+    border-radius: 10px;
+}
+.year-list-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #64748b; /* gray-500 */
+}
